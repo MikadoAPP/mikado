@@ -110,7 +110,7 @@ node lib/signer.js --private-key=/some/private.key some-commands.json.log | node
 
 #### Creating a suitable PEM formatted public key
 
-A certificate suitable for use by the verifier can be generated from the user's private key.
+A PEM formatted private key suitable for use by the verifier can be generated from the user's RSA key file as would be used with SSH.
 
 ```` bash
 openssl rsa -in ~/.ssh/id_rsa -pubout -out idrsa.pub.pem
