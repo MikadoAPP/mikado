@@ -1,6 +1,6 @@
 # The Mikado 帝
 
-![Ko-Ko](https://upload.wikimedia.org/wikipedia/commons/2/2e/KoKo_1926.jpg)
+<img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/KoKo_1926.jpg" alt="Ko-Ko" align="right" />
 
 An extremely light and easy to understand parallel execution and orchestration framework.
 
