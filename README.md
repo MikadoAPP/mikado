@@ -1,4 +1,4 @@
-# The Mikado
+# The Mikado 帝
 
 ![Ko-Ko](https://upload.wikimedia.org/wikipedia/commons/2/2e/KoKo_1926.jpg)
 
@@ -18,9 +18,9 @@ can be imported as libraries in a node.js app to create an easily deployable app
 
 ## What's with the Name?
 
-This project is named for the emperor in Gilbert and Sullivan's [The Mikado](http://en.wikipedia.org/wiki/The_Mikado). Just as the Mikado in the play has a Lord High Executioner that does his bidding,
+Mikado is an [obsolete English term for the emperror of Japan](http://en.wikipedia.org/wiki/Emperor_of_Japan). This project is named for the emperor in Gilbert and Sullivan's [The Mikado](http://en.wikipedia.org/wiki/The_Mikado). Just as the Mikado in the play has a Lord High Executioner that does his bidding,
 this project gives you the executioner to do whatever dirty work you need done.  I recommend
-naming your instance [Ko-Ko]().
+naming your instance [Ko-Ko](http://web.stcloudstate.edu/scogdill/mikado/names.html#koko).
 
 ## The Components
 
