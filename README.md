@@ -32,7 +32,8 @@ executioner to do whatever dirty work you need done.  I recommend naming your in
 - [The Signer](#signer)
 - [The Verifier](#verifier)
 
-### The Executor<a name="executor" />
+<a name="executor" />
+### The Executor
 
 The executor is a through stream that accepts input commands telling it what processes to start, stop, and writes to stdin
 and outputs a single stream of events that happened on the child. This is a thin wrapper around node core's
@@ -68,7 +69,8 @@ The Executor emits objects of the following structure:
     if a signal was sent to the process.
   - **TODO**: `id`: This should be the unique id of this execution job.
 
-### The Signer<a name="signer" />
+<a name="signer" />
+### The Signer
 
 The signer signs every json document by stringifying it, signing it with a provided public key, and
 then adding a `signature` attribute to the document. This ensures that the origin of the message can
@@ -91,8 +93,8 @@ of the entire json document stringified and signed with a public key.
 ```` bash
 cat some-commands.json.log | node lib/signer.js --private-key=~/.ssh/id_rsa
 ````
-
-### The Verifier<a name="verifier" />
+<a name="verifier" />
+### The Verifier
 
 The verifier verifies signatures produced by [The Signer](#signer). You provide the verifier with a public key and it
 then removes the signature key from the document, converts it to a string (via `JSON.stringify`), verifies the signature
