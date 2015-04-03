@@ -35,7 +35,8 @@ executioner to do whatever dirty work you need done.  I recommend naming your in
 ### The Executor<a name="executor" />
 
 The executor is a through stream that accepts input commands telling it what processes to start, stop, and writes to stdin
-and outputs a single stream of events that happened on the child.
+and outputs a single stream of events that happened on the child. This is a thin wrapper around node core's
+[child process](https://nodejs.org/api/child_process.html#child_process_class_childprocess) see for more details.
 
 #### Input
 
@@ -44,6 +45,8 @@ The Executor accepts an object stream of with the following schema:
   - `command`: The command to execute.
   - `cwd`: The directory from which to execute it (optional).
   - `env`: A hash of environment variables (if specified, it overwrites the existing ones, if not the processes own are used (optional).
+  - `uid`: Sets the user identity of the process.
+  - `gid`: Sets the group identity of the process.
   - **TODO**: `id`: If specified, this should be the unique id of this execution, if not specified one should be identified and added.
   - **TODO**: `action`: Can be one of `start`, `kill`, or `write`. Defaults to `start`.
   - **TODO**: `input`: If action is `kill` this is the string of the signal to send to the child. If action is `write` this will be written to
