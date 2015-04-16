@@ -80,37 +80,39 @@ another transform stream.
 
 #### Input
 
-Any javascript object.  The object does not require any field to be *present* but `signature` should be **absent**.
-If a field called `signature` exists then it will throw an error.
+Any javascript object.  The object does not require any field to be *present* but `signature` should
+be **absent**. If a field called `signature` exists then it will throw an error.
 
 #### Output
 
-The output is a javascript object that is identical to the input but with a `signature` field that contains the body
-of the entire json document stringified and signed with a public key.
+The output is a javascript object that is identical to the input but with a `signature` field that
+contains the body of the entire json document stringified and signed with a public key.
 
 #### Usage:
 
 ```` bash
-cat some-commands.json.log | node lib/signer.js --private-key=~/.ssh/id_rsa
+cat some-commands.json.log | mikado signer --private-key=~/.ssh/id_rsa
 ````
 <a name="verifier" />
 ### The Verifier
 
-The verifier verifies signatures produced by [The Signer](#signer). You provide the verifier with a public key and it
-then removes the signature key from the document, converts it to a string (via `JSON.stringify`), verifies the signature
-from the document, and if the document was successfully verified, it emits the object with the signature removed.
+The verifier verifies signatures produced by [The Signer](#signer). You provide the verifier with a
+public key and it then removes the signature key from the document, converts it to a string (via
+`JSON.stringify`), verifies the signature from the document, and if the document was successfully
+verified, it emits the object with the signature removed.
 
 #### Usage:
 
 ```` bash
 # Note the public key file needs to be in PEM format.  See below for conversion instructions.
-node lib/signer.js --private-key=/some/private.key some-commands.json.log | node lib/verifier.js --public-key=/some/public.key.pem
+mikado signer --private-key=/some/private.key some-commands.json.log | mikado verifier --public-key=/some/public.key.pem
 # The output of this command should be identical to `cat some-commands.json.log` (but you'd normally have some network operation in between.
 ````
 
 #### Creating a suitable PEM formatted public key
 
-A PEM formatted private key suitable for use by the verifier can be generated from the user's RSA key file as would be used with SSH.
+A PEM formatted private key suitable for use by the verifier can be generated from the user's RSA key
+file as would be used with SSH.
 
 ```` bash
 openssl rsa -in ~/.ssh/id_rsa -pubout -out idrsa.pub.pem

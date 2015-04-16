@@ -1,0 +1,67 @@
+#! /usr/bin/env node
+
+var fs = require('fs')
+   ,through2 = require('through2')
+   ,split2 = require('split2')
+   ,yargs = require('yargs')
+;
+
+var lib = require('../index');
+
+var source = null;
+
+yargs = yargs
+  .describe('help', 'Display help message.')
+;
+
+var argv = yargs.argv;
+
+if (argv._[0] == undefined) {
+  console.error('You must specify a subcommand.');
+  process.exit(1);
+}
+if (lib[argv._[0]] == undefined) {
+  console.error('Invalid subcommand', process.argv[2]);
+  process.exit(1);
+}
+
+
+if (argv._[1]) {
+  source = fs.createReadStream(argv._[1]);
+}
+else {
+  source = process.stdin;
+}
+
+
+var Class = lib[process.argv[2]];
+
+var argv = {};
+
+if (Class.options) {
+  yargs = Class.options(yargs);
+  argv = yargs.argv;
+  if (argv.help) {
+    yargs.showHelp();
+    process.exit();
+  }
+}
+
+var optionPreparer = Class.prepareOptions || function(options, done) { done(null, options); };
+
+optionPreparer(argv, function(error, options) {
+
+  var processor = new Class(argv);
+
+  source
+    .pipe(split2(JSON.parse))
+    .pipe(processor, {end: false})
+    .pipe(through2.obj(function(data, enc, done) {
+      this.push(JSON.stringify(data) + "\n");
+      done();
+    }))
+    .pipe(process.stdout)
+  ;
+
+});
+
